@@ -4,10 +4,7 @@
 *.*~
 *.log
 *.swp
-*.table
 
-# sqlite database files
-*.sqlite
 
 # web2py cache, errors and sessions files
 cache/*
