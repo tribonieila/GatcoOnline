@@ -1,0 +1,16 @@
+{{right_sidebar_enabled =True}}
+{{extend 'layout.html'}}
+
+{{block middle_sidebar}}
+  {{=LOAD('default','email_form',ajax=True)}}
+{{pass}}
+{{end}}
+
+{{block right_sidebar}}
+  {{=LOAD('default', 'cc_sif_form', ajax = True)}}
+
+{{=LOAD('default','show_items',ajax=True,target='show_items')}}
+{{=LOAD('default','other_infos')}}
+
+{{pass}}
+{{end}}

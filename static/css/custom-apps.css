@@ -1,0 +1,93 @@
+@font-face {
+    font-family: 'robotoregular';
+    src: url('../fonts/roboto-regular-webfont.eot');
+    src: url('../fonts/roboto-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/roboto-regular-webfont.woff2') format('woff2'),
+         url('../fonts/roboto-regular-webfont.woff') format('woff'),
+         url('../fonts/roboto-regular-webfont.ttf') format('truetype'),
+         url('../fonts/roboto-regular-webfont.svg#robotoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body{
+	background: url('../images/sos.png');
+	font-family: 'robotoregular', Helvetica,Arial,sans-serif;
+	font-size: 12px;
+	color: #565656;
+}
+
+legend {
+    color: #565656;
+}
+.navbar-inverse {
+	background: url('../images/sos.png');
+	background-repeat: repeat;	
+    border-color: #DDD;
+        border-top-color: #DDD;
+        border-right-color: #DDD;
+        border-bottom-color: #DDD;
+        border-left-color: #DDD;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    text-shadow: none;
+}
+.navbar-inverse .navbar-nav > li > a {
+    color: #565656;
+}
+
+.navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover {
+    color: #004489;
+    background-color: transparent;
+}
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > .open > a:hover {
+    color: #FFF;
+    background-color: #989898;
+}
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .open > a {
+    background-image: none;
+    background-repeat: repeat-x;
+    box-shadow: none;
+}
+
+
+.panel{}
+.panel-default {}
+.panel {
+    margin-bottom: 20px;
+    background-color: #FFF;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+
+
+
+
+.alert {
+    text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 2px 0px rgba(255, 255, 255, 0.50) inset, 0px 2px 2px rgba(0, 0, 0, 0.1);
+	
+}
+
+.panel {
+	    text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 2px 0px rgba(255, 255, 255, 0.50) inset, 0px 2px 2px rgba(0, 0, 0, 0.1);
+	background: url('../images/sos.png');
+}
+.panel .panel-heading {
+	color: #565656;
+	background: url('../images/sos.png');
+}
+.footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: auto;
+    background: #333 none repeat scroll 0% 0%;
+    color: #AAA; 
+}
+

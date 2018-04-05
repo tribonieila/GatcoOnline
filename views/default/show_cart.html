@@ -1,0 +1,16 @@
+{{right_sidebar_enabled =True}}
+{{extend 'layout.html'}}
+
+{{if session.show_items:}}
+    <h3>Your Shopping Cart</h3>
+    <p>The items listed below are currently in your shopping cart. If you're ready to place your order just click the 'Checkout' button on the right and we'll ask for a few details and place the order.</p>
+    {{=LOAD('default', 'show_carts', ajax=True, target='show_carts')}}
+
+{{else:}} 
+    {{=LOAD('default', 'show_empty_cart', ajax = True, target='show_empty_cart')}}
+{{pass}}
+{{block right_sidebar}}
+    {{=LOAD('default','show_items', ajax=True, target='items')}}
+    {{=LOAD('default','card_infos')}}
+{{pass}}
+{{end}}

@@ -1,0 +1,3 @@
+{{extend 'layout.html'}}
+
+{{=LOAD('manager','quotation_requests', args=request.args(0), ajax=True, target='status')}} 

@@ -1,0 +1,52 @@
+{{right_sidebar_enabled =True}}
+{{extend 'layout.html'}}
+
+<h1>Shipping Information</h1>
+
+<div style="font-size: 11px"><strong>Audi Volkswagen Porsche offers the following shipping options:</strong></div>
+<table class="table table-bordered">
+ <tbody> <tr> <td style="background: #666; color: #fff"><strong>Delivery Option</strong></td> <td style="background: #666; color: #fff"><strong>Processing Time</strong></td> <td style="background: #666; color: #fff"><strong>Estimated Shipping Time</strong></td> <td style="background: #666; color: #fff" nowrap="nowrap"><strong>Estimated Order Arrival</strong></td> <td style="background: #666; color: #fff"><strong>Shipping Charges</strong></td> </tr> <tr> <td style="color: #444"><a href="/o/instorepickup"><strong>In-Store Pickup</strong></a><br> Available for most products</td> <td style="color: #444">Pickup in 30-minutes after receiving your order confirmation e-mail</td> <td style="color: #444">N/A</td> <td style="color: #444">Same day</td> <td style="color: #444">Free</td> </tr> <tr> <td style="color: #444"><strong>Standard</strong></td> <td style="color: #444" rowspan="3">Orders typically ship within 1 business day</td> <td style="color: #444">Varies by destination; typically 3 business days</td> <td style="color: #444">3 - 4 business days</td> <td style="color: #444">Free for orders over $75 (continental US)<br> Otherwise based on location and weight</td> </tr> <tr> <td style="color: #444"><strong>Expedited (Faster)</strong></td> <td style="color: #444">2 business days</td> <td style="color: #444">2 - 3 business days</td> <td style="color: #444">Based on location and weight</td> </tr> <tr> <td style="color: #444"><strong>Urgent (Fastest)</strong></td> <td style="color: #444">1 business day</td> <td style="color: #444">1 - 2 business days</td> <td style="color: #444">Based on location and weight</td> </tr> </tbody></table>
+
+<div><strong>Shipping Time</strong></div>
+<div>Please refer to the above chart for estimated shipping times. We have multiple warehouses located across the United States and will ship from the warehouse closest to your address as inventory permits. For fastest delivery, consider <a href="/o/instorepickup">In-Store Pickup</a>.</div></br>
+
+<div>Important Notes:</div>
+<ul> <li>Standard Shipping to Alaska, Hawaii, U.S. Territories, or APO/FPO addresses may take longer than the estimated shipping times shown above.</li> <li>Expedited Shipping and Urgent Shipping are not available for orders shipped to Alaska, Hawaii, U.S. Territories, P.O. Boxes, or APO/FPO addresses.</li> <li>Weekend delivery is not available for Expedited Shipping or Urgent Shipping.</li> <li>UPS observes the following holidays: New Year's Day, Memorial Day, Independence Day, Labor Day, Thanksgiving Day, Day after Thanksgiving, Christmas Day, and New Year's Eve. Please take into account these holidays when estimating order arrival.</li></ul></br>
+
+<div><strong>Inclement Weather Advisory</strong></div>
+<div>Deliveries may occasionally be delayed due to inclement weather. Please check directly with the delivery carrier (UPS or USPS) for your order if your package has been delayed. Advance Auto Parts is not responsible for unexpected delays caused by inclement weather or delivery carrier service interruptions.</div></br>
+
+<div><strong>Order Verification</strong></div>
+<div>All orders are subject to verification and occasionally this verification may delay your order.</div>
+<div>Additionally:</div><ul> <li>Once your order has been verified you will receive an order confirmation email.</li> <li>Once your order ships you will receive a separate order shipped email with your tracking information.</li> <li>In-Store Pickup orders are generally ready for pickup within 1 hour after you receive your order confirmation email.</li></ul>
+
+<div><strong>Shipping Charges</strong></div>
+<div>Shipping charges are determined based on shipping service, destination address, and weight of your order. Your actual shipping charges will be shown during checkout and will be updated if you change your shipping service, destination address, or cart contents.</div></br>
+
+<div><strong>Split Shipments</strong></div>
+<div>Due to varying item availability and warehouse locations, your items may be shipped separately when you place an order for multiple items. You will not be charged extra for split shipments.</div></br>
+
+<div><strong>Free Shipping on All Orders Over $75</strong></div>
+<div>Receive free Standard Shipping to addresses in the continental United States on orders totaling over $75. Shipments to Alaska, Hawaii or U.S. Territories are not eligible for Free Shipping offer. To qualify for free shipping, your order total must be $75 or more, after any promotional discount has been applied. Core charges, shipping and handling charges, fees, and taxes are not included in the calculation of order total. Motor oil is available for in-store pick-up only, due to shipping restrictions.</div></br>
+
+<div><strong>Order Cutoff Times</strong></div>
+<div>Orders placed by 2pm Eastern Time are generally shipped the same business day. For example, place your order with Urgent Shipping by 2pm on a Thursday to receive your order by Friday. Orders placed after 2pm Eastern Time and orders placed on weekends and holidays will be shipped the following business day. For example, an order placed on a Friday after 2pm will be shipped the following Monday.</div></br>
+
+<div><strong>Shipping Destinations</strong></div>
+<div>We ship to any United States, US Territory (including Puerto Rico), or APO/FPO address. We currently do not ship to international addresses.</div></br>
+
+<div><strong>Changing Shipping Destination</strong></div>
+<div>Unfortunately, you cannot change your shipping destination once have submitted an order.</div></br>
+
+<div><strong>Shipping Hazardous and Restricted Materials</strong></div>
+<div>Federal and state regulations prohibit the transport and/or sale of certain materials. Some products on our site will be available only for <a href="/o/instorepickup">In-Store Pickup</a> or will have limited shipping options. These products include, but are not limited to: batteries, motor oil, various chemicals, and fluids. Check individual product pages for details on shipping options available for that product.</div>
+</br></br></br></br>
+
+{{block right_sidebar}}
+
+ {{=LOAD('default', 'cc_cf_form', ajax = True)}}
+
+{{=LOAD('default','show_items',ajax=True,target='show_items')}}
+{{=LOAD('default','other_infos')}}
+{{pass}}
+{{end}}

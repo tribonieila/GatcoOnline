@@ -1,0 +1,22 @@
+{{right_sidebar_enabled =False}}
+{{extend 'layout.html'}}
+<h2>Audi</h2>
+<table class="pure-table pure-table-horizontal">
+	    <thead>
+        <tr>
+            
+            <th>Part No</th>
+            <th>Description</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+{{for p in auto_parts:}}
+
+  <tr>
+    <td>{{=p.part_no}}</td><td>{{=p.description}}</td><td> - ${{=p.in_dollar}}</td>
+    
+ 
+
+  </tr>  
+{{pass}}
+</table>

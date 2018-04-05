@@ -1,0 +1,131 @@
+{{right_sidebar_enabled =True}}
+{{extend 'layout.html'}}
+{{import locale}}
+{{locale.setlocale(locale.LC_ALL, '') }}
+{{block header}}
+    <header class="container-fluid audi">
+      <div class="jumbotron text-center">
+      </div>
+    </header>
+    <div class="alert" role="alert" style="background-color:#FF9900">
+  		<span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>  
+  		Call us today on <strong>+974 44600655</strong> if you have any questions.
+  		<div class="pull-right">
+  			<span class="glyphicon glyphicon-gift" aria-hidden="true"></span>
+  			<strong>This month only!</strong> We offer special price.
+  		</div>
+	</div>
+
+{{end}}
+<h3>Introducing our featured products</h3>
+</br>
+
+{{for x in rows:}}
+<div class="col-md-4">
+  <div class="container-fluid">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="media">
+          <div class="media-left media-top">
+            <img class="media-object" width="64" height="64" src="{{=URL('static/images', 'audi.jpg')}}">
+          </div>
+
+
+
+          <div class="media-body">
+            <h4 class="media-heading"><a href="#">{{=x.part_no}}</a></h4>
+            <small>{{=x.description}}</small></br>
+            <strong>$ {{=locale.format('%.2f',x.in_dollar, grouping = True)}}</strong>
+            {{=A('add', callback=URL('add_item', vars=dict(id=x.id, action='add')), _class='btn btn-primary btn-xs', _style="float:right", target="add_item")}}
+
+            <!-- Small modal -->
+<button style="float:right" type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target=".bs-example-modal-lg">Info</button>
+
+
+
+  
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{pass}}
+
+
+
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">brand name here...</h4>
+      </div>
+      <div class="modal-body">
+      <div class="media">
+        <div  class="media-left media-top">
+          <a href="#">
+            <img width = "128" height = "128" class="media-object" src="..." alt="...">image here...
+          </a>
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading">part number here...</h4>
+          <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p><p>Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+        </div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="clearfix visible-xs-block"></div>
+<table width = "100%">
+  <tr>
+    <td>
+      <nav>
+        <ul class="pager">
+          <li class="previous">{{if page:}}<a href="{{=URL(args=[page-1])}}">Previous</a>{{pass}}</li>
+          <li class="next">{{if len(rows)>items_per_page:}}<a href="{{=URL(args=[page+1])}}">Next</a>{{pass}}</li>
+        </ul>
+      </nav>
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+
+{{block right_sidebar}}
+<form action="{{=URL('default', 'audi')}}" method="GET">
+    
+        <div class="input-group">
+            <input class="form-control" id="keywords" name="q" placeholder="Search for..." value="{{=request.vars.q or ''}}" type="text">
+            <span class="input-group-btn">
+                <input class="btn btn-default" value="Go!" type="submit">
+            </span>
+        </div>
+</form>
+</br>
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <span class="glyphicon glyphicon-filter" aria-hidden="true"></span>
+  	<span class="sr-only">Success:</span><strong>Category</strong>
+  </div>
+  <div class="panel-body">
+    
+  </div>
+</div>
+
+{{=LOAD('default','show_items', ajax=True, target='show_items')}}
+{{=LOAD('default','other_infos')}}
+{{pass}}
+{{end}}

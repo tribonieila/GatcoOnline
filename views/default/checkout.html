@@ -1,0 +1,23 @@
+{{right_sidebar_enabled =True}}
+{{extend 'layout.html'}}
+
+{{if session.show_items:}}
+  <h3>Place your order</h3>
+  <p>Fantastic! You're ready to place your order, just follow the instructions below and we'll get your products shipped to you as quickly as we can. </p>
+  <h4>Review the products in your shopping cart</h4>
+
+  {{=LOAD('default', 'show_carts', ajax=True, target='show_carts')}}
+  
+  {{=LOAD('default', 'c.load', ajax=True)}}    
+
+{{else:}} 
+    {{=LOAD('default', 'show_empty_cart', ajax = True, target='show_empty_cart')}}
+
+{{pass}}
+
+{{block right_sidebar}}
+    {{=LOAD('default','show_items', ajax=True, target='items')}}
+    {{=LOAD('default','card_infos')}}
+{{pass}}
+{{end}}
+

@@ -1,0 +1,38 @@
+{{right_sidebar_enabled =True}}
+{{extend 'layout.html'}}
+
+{{=grid}}
+
+{{block right_sidebar}}
+<form action="../default/volkswagen" enctype="multipart/form-data" method="GET">
+    
+        <div class="input-group">
+            <input class="form-control" id="keywords" name="keywords" placeholder="Search for..." value="" type="text">
+            <span class="input-group-btn">
+                <input class="btn btn-default" value="Go!" type="submit">
+            </span>
+        </div>
+
+</form>
+</br>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <span class="glyphicon glyphicon-filter" aria-hidden="true"></span>
+    <span class="sr-only">Success:</span><strong>Category</strong>
+  </div>
+  <div class="panel-body">
+    {{=form}}
+  </div>
+</div>
+
+{{=LOAD('default','show_items',ajax=True,target='show_items')}}
+{{=LOAD('default','other_infos')}}
+</div>
+{{pass}}
+{{end}}
+<script>
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+</script>

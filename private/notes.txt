@@ -1,0 +1,194 @@
+957768149/2653
+  ==============
+# email example model
+VALUE="""
+Hello,
+please send me informations about DePaul's Computational Finance Group.
+"""
+
+db.define_table('message',
+   Field('your_name',requires=IS_NOT_EMPTY()),
+   Field('your_email',requires=IS_EMAIL()),
+   Field('your_message','text',default=VALUE),
+   Field('timestamp',default=str(datetime.datetime.now())))
+   
+   
+def email_user(sender,to,message,subject="group notice"):
+    import smtplib
+    fromaddr=sender
+    if type(to)==type([]): toaddrs=to
+    else: toaddrs=[to]
+    msg="From: %s\r\nTo: %s\r\nSubject: %s\r\n\r\n%s"%(fromaddr,", ".join(toaddrs),subject,message)
+    server = smtplib.SMTP('localhost:25')
+    server.sendmail(fromaddr, toaddrs, msg)
+    server.quit()
+     
+# email example controller
+to=['mdipierro@cs.depaul.edu','paula@mikrut.org']
+
+def index():
+    form=SQLFORM(db.message,fields=['your_name','your_email','your_message'])
+    if form.accepts(request,session):
+       subject='cfgroup message from '+form.vars.your_name
+       email_user(sender=form.vars.your_email,\
+                  to=to,\
+                  message=form.vars.your_message,\
+                  subject=subject)
+       response.flash='your message has been submitted'
+    elif form.errors:
+       response.flash='please check the form and try again'
+    return dict(form=form)
+
+  ==============
+
+in db.py i
+import stripe
+and added
+stripe.api_key = "Replace_with_your_key"
+
+I used the Custom form from the Stripe documents in my view.
+
+Then in the controller i put the code from the example just a couple of small changes. You change the request.POST to request.post_vars. You also need to put this in an if loop.
+
+def createcustomer():
+     # Get the credit card details submitted by the form
+    if request.post_vars:
+        token = request.post_vars['stripeToken']
+
+        # Create the charge on Stripe's servers - this will charge the user's card
+        try:
+
+            # Create a Customer
+            customer = stripe.Customer.create(
+                card=token,
+                description="payin...@example.com"
+            )
+            ﻿
+           # Charge the Customer instead of the card
+               stripe.Charge.create(
+               amount=1000, # in cents
+               currency="usd",
+               customer=customer.id
+           )
+
+            #Save Customer ID in your DB
+            db.customer.insert(customer_id = customer.id )
+            db.commit()
+
+            # Redirect to view post
+            session.flash = T("You Payed!")
+            return redirect(URL('default', 'view'))
+
+        except stripe.CardError, e:
+          # The card has been declined
+          response.flash = "Card Error"
+          pass
+    
+
+    
+        '''
+        stripe = Stripe(api_key)
+        d = stripe.charge(amount=100,
+                      currency='usd',
+                      card_number=form.vars.card_number,
+                      card_exp_month=form.vars.card_exp_month,
+                      card_exp_year=form.vars.card_exp_year,
+                      card_cvc_check=form.vars.card_cvc_check,
+                      description='the usual black shoes')
+        if d.get('paid',False):
+            # payment accepted
+            response.flash = 'form accepted'
+        else: 
+            # error is in d.get('error','unknown')    
+            response.flash = 'form error'
+        '''
+
+    <h3>Your Shopping Cart</h3>
+    <p>The items listed below are currently in your shopping cart. If you're ready to place your order just click the 'Checkout' button on the right and we'll ask for a few details and place the order.</p>
+
+auth.settings.formstyle = 'bootstrap3'
+auth.settings.formstyle = SQLFORM.formstyles.bootstrap3_stacked
+auth.settings.formstyle = SQLFORM.formstyles.bootstrap3_inline
+
+  <table width = '100%'>
+    <tr><td colspan='2' width = '50%'>Name</td><td colspan='2' width = '50%'>Billing Address</td></tr>
+
+    {{=form.custom.begin}}
+    {{form.custom.widget.address_1['_placeholder']='Deliver to (name/company)'}}
+    {{form.custom.widget.address_2['_placeholder']='Street'}}
+    {{form.custom.widget.town_or_city['_placeholder']='Town/City'}}
+    {{form.custom.widget.postcode['_placeholder']='Postcode'}}
+    {{form.custom.widget.country['_placeholder']='Country'}}
+    <tr><td>{{=form.custom.widget.first_name}}</td><td>{{=form.custom.widget.last_name}}</td><td colspan='2'>{{=form.custom.widget.address_1}}</td></tr>
+    <tr><td colspan='2'>Your Email Address</td><td colspan='2'>{{=form.custom.widget.address_2}}</td></tr>
+    <tr><td colspan='2'>{{=form.custom.widget.email}}</td><td colspan='2'>{{=form.custom.widget.town_or_city}}</td></tr>
+    <tr><td colspan='2'>Your Contact Phone/Mobile No.</td><td colspan='2'>{{=form.custom.widget.postcode}}</td></tr>
+    <tr><td colspan='2'>{{=form.custom.widget.contact_no}}</td><td colspan='2'>{{=form.custom.widget.country}}</td>  </tr>
+    <tr><td></td><td></td><td></td><td>{{=form.custom.submit}}</td></tr>
+    {{=form.custom.end}}
+
+  </table>
+
+  Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size: 17px;
+line-height: 1.5;
+color: #4C4C4C;
+
+    #model = [OPTION(texts.model, _value=texts.id) for texts in db(db.car_model.brand_id == 1).select(db.car_model.ALL)]  
+    #form=FORM('Model:', SELECT(*model, _name='model', _type="text", _placeholder="200"),
+    #          INPUT(_type='submit'))
+#auth.settings.formstyle = 'bootstrap3'
+#auth.settings.formstyle = SQLFORM.formstyles.bootstrap3_stacked
+#auth.settings.formstyle = SQLFORM.formstyles.bootstrap3_inline
+
+<table width="100%">
+  <tr>
+    <td width="50%" valign="top">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6"><span class="label label-default">Name</span>
+            <input type="text" class="form-control" placeholder="first name"></div>
+          <div class="col-md-6"><span class="label"> </span>  
+            <input type="text" class="form-control" placeholder="last name"></div>
+        </div>
+        <div class="row">
+          <div class="col-md-12"><span class="label label-default">Company Name (optional)</span>
+            <input type="text" class="form-control" placeholder="company"></div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12"><span class="label label-default">Your E-Mail Address</span>
+            <input type="text" class="form-control" placeholder="email"></div></div>
+
+  <div class="row">
+    <div class="col-md-12"><span class="label label-default">Your Contact Phone Number</span>
+      <input type="text" class="form-control" placeholder="contact no"></div></div>
+
+      </div>
+    </td>
+    <td width="50%">
+      <div class="container-fluid">
+        <div class="row"><div class="col-md-12"><span class="label label-default">Billing Address</span><input type="text" class="form-control" placeholder="address 1"></div></div></br>
+        <div class="row"><div class="col-md-12"><input type="text" class="form-control" placeholder="address 2"></div></div></br>
+        <div class="row"><div class="col-md-12"><input type="text" class="form-control" placeholder="town or city"></div></div></br>
+        <div class="row"><div class="col-md-12"><input type="text" class="form-control" placeholder="postcode"></div></div></br>
+        <div class="row"><div class="col-md-12"><input type="text" class="form-control" placeholder="country"></div></div></br>
+        <div class="row"><div class="col-md-12">
+          <div class="checkbox"><label data-toggle="collapse" data-target="#collapseExample"><input type="checkbox"/>Deliver to a different address?</label></div></div></div></br>
+        <div class="row"><div class="col-md-12"><div class="collapse" id="collapseExample">
+          <div>
+            <div class="row"><div class="col-md-12"><span class="label label-default">Delivery Address</span><input type="text" class="form-control" placeholder="address 1"></div></div></br>
+            <div class="row"><div class="col-md-12"><input type="text" class="form-control" placeholder="address 2"></div></div></br>
+            <div class="row"><div class="col-md-12"><input type="text" class="form-control" placeholder="town or city"></div></div></br>
+            <div class="row"><div class="col-md-12"><input type="text" class="form-control" placeholder="postcode"></div></div></br>
+            <div class="row"><div class="col-md-12"><input type="text" class="form-control" placeholder="country"></div></div></br>            
+          </div>
+        </div></div></div>
+        <div class="row" align="right">
+          <button type="button" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Continue to payment</button>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>   

@@ -1,0 +1,60 @@
+{{right_sidebar_enabled =True}}
+{{extend 'layout.html'}}
+{{block header}}
+    <header class="container-fluid contact">
+      <div class="jumbotron text-center">
+      </div>
+    </header>
+    <div class="alert" role="alert">
+      <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>  
+      Call us today on <strong>+974 44600655</strong> if you have any questions.
+      <div class="pull-right">
+        <span class="glyphicon glyphicon-gift" aria-hidden="true"></span>
+        <strong>This month only!</strong> We offer special price.
+      </div>
+  </div>
+
+{{end}}
+{{block middle_sidebar}}
+
+<h3>Pay using your credit/debit card</h3>
+
+<form class="form-horizontal">
+  {{=form.custom.begin}}
+  <div class="form-group">
+    <label class="control-label col-sm-3">Card No</label>
+    <div class="col-xs-4">
+      {{=form.custom.widget.card_number}}
+    </div> 
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-3">Expiry Date</label>
+    <div class="col-xs-2">
+      {{=form.custom.widget.card_exp_month}}
+    </div>
+    <div class="col-xs-2">
+      {{=form.custom.widget.card_exp_year}}
+    </div>  
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-3">Security Code</label>
+    <div class="col-xs-4">
+      {{=form.custom.widget.card_cvc_check}}
+      <span class="help-block">This is the 3 digit number on the back of your card.</span>
+    </div> 
+  </div>
+  <div class="form-group">
+    <div class="col-sm-9 col-sm-offset-3">
+      {{=form.custom.submit}}
+    </div>
+  </div>
+  {{=form.custom.end}}
+</form>
+
+
+{{end}}
+
+{{block right_sidebar}}
+    {{=LOAD('default','show_items', ajax=True, target='items')}}
+    {{=LOAD('default','card_infos')}}
+{{end}}
